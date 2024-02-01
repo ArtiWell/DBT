@@ -18,8 +18,8 @@ public class DiscordBot1Application {
         FlipListener flipListenerBot = new FlipListener();
         RollListener rollListener = new RollListener();
 
-        JDABuilder.createLight("MTE5ODU3MTU3NjI2MjY3MjQzNA.GpflHa.JlUyXSJ7SCBlPk6PtoH5r1NX_A0T5pr7Npp_Fs")
-                .addEventListeners(artemBot, rollListener)
+        JDABuilder.createLight("")
+                .addEventListeners(artemBot, rollListener, flipListenerBot)
                 .enableIntents(
                         List.of(
                                 GatewayIntent.GUILD_MESSAGES,
