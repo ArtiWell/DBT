@@ -15,7 +15,7 @@ public class DiscordBot1Application {
     public static void main(String[] args) {
 		ArtemBot artemBot = new ArtemBot();
 
-        JDABuilder.createLight("MTE5ODU3MTU3NjI2MjY3MjQzNA.GvY60i.iKHoEUA1d-oN06XEfDUVp8xHeftudt60fea10s")
+        JDABuilder.createLight("MTE5ODU3MTU3NjI2MjY3MjQzNA.GhZvwz.Ux3-YFnoRA7as5hCMDTE2HOnxEgK6JK2HUq2mk11")
                 .addEventListeners(artemBot)
                 .enableIntents(
                         List.of(
@@ -24,7 +24,7 @@ public class DiscordBot1Application {
                         )
                 )
                 .setStatus(OnlineStatus.ONLINE)
-				.setActivity(Activity.watching("Dima"))
+				.setActivity(Activity.watching("Pornt"))
                 .build();
 
 
