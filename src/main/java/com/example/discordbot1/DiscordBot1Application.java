@@ -1,7 +1,8 @@
 package com.example.discordbot1;
 
-import com.example.discordbot1.listeners.FlipListener;
-import com.example.discordbot1.listeners.RollListener;
+import com.example.discordbot1.listeners.Listener;
+import com.example.discordbot1.listeners.command.Flip;
+import com.example.discordbot1.listeners.command.Roll;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -14,12 +15,9 @@ import java.util.List;
 public class DiscordBot1Application {
 
     public static void main(String[] args) {
-		ArtemBot artemBot = new ArtemBot();
-        FlipListener flipListenerBot = new FlipListener();
-        RollListener rollListener = new RollListener();
-
+        Listener listener = new Listener();
         JDABuilder.createLight("")
-                .addEventListeners(artemBot, rollListener, flipListenerBot)
+                .addEventListeners(listener)
                 .enableIntents(
                         List.of(
                                 GatewayIntent.GUILD_MESSAGES,
