@@ -11,7 +11,7 @@ public class RollListener extends ListenerAdapter {
         if (event.getAuthor().isBot()){
             return;
         }
-        if (event.getMessage().getContentDisplay().equals("$roll")){
+        if ("$roll".equals(event.getMessage().getContentDisplay())){
             int a = (int) (Math.random()*100);
             event.getChannel().sendMessage(String.valueOf(a)).queue();
         }
