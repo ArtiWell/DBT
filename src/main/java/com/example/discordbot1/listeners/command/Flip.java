@@ -1,17 +1,20 @@
 package com.example.discordbot1.listeners.command;
 
-import java.util.Random;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class Flip implements Command{
+
+public class Flip implements Command {
+
 
     @Override
-    public String command() {
-        Random r = new Random();
-        int chance = r.nextInt(2);
+    public void command(MessageReceivedEvent event) {
+        int chance = (int) (Math.random() * 2);
+        String asMention = event.getAuthor().getAsMention();
         if (chance == 1) {
-            return "орёл";
+            asMention += "\nорёл";
         } else {
-            return "решка";
+            asMention += "\nрешка";
         }
+        event.getChannel().sendMessage(asMention).queue();
     }
 }

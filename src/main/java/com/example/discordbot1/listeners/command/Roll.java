@@ -1,13 +1,15 @@
 package com.example.discordbot1.listeners.command;
 
 
-import java.util.Random;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Roll implements Command {
 
 
     @Override
-    public String command() {
-        return String.valueOf(new Random().nextInt(100) + 1);
+    public void command(MessageReceivedEvent event) {
+         event.getChannel().sendMessage(event.getAuthor().getAsMention()
+                + "\n"
+                + (int)(Math.random()*100)).queue();
     }
 }
