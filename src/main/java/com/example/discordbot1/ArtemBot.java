@@ -9,11 +9,12 @@ public class ArtemBot extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot()){
-            return;
-        }
-        event.getChannel().sendMessage(event.getMessage().getContentDisplay())
-                .queue();
+//        if (event.getAuthor().isBot()){
+//            return;
+//        }
+//
+//        event.getChannel().sendMessage(event.getMessage().getContentDisplay())
+//                .queue();
 
 
 
