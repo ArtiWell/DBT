@@ -1,13 +1,14 @@
-package com.example.discordbot1.listeners.command;
+package ru.dbt.listeners.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.springframework.stereotype.Component;
 
-
-public class Flip implements Command {
+@Component
+public class FlipCommand implements Command {
 
 
     @Override
-    public void command(MessageReceivedEvent event) {
+    public void run(MessageReceivedEvent event) {
         int chance = (int) (Math.random() * 2);
         String asMention = event.getAuthor().getAsMention();
         if (chance == 1) {
@@ -16,5 +17,10 @@ public class Flip implements Command {
             asMention += "\nрешка";
         }
         event.getChannel().sendMessage(asMention).queue();
+    }
+
+    @Override
+    public String getKey() {
+        return "flip";
     }
 }
