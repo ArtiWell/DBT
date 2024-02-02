@@ -18,5 +18,6 @@ public class CommandContainer {
     public void action(MessageReceivedEvent event) {
          map.getOrDefault(event.getMessage().getContentDisplay(),e -> {})
                 .command(event);
+
     }
 }
