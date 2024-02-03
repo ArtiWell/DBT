@@ -22,14 +22,30 @@ public class PhotoCommand implements Command {
     public void run(MessageReceivedEvent event) {
         String imagePath = "src/main/resources/static/php.jpg";
         String imagePath1 = "src/main/resources/static/js.png";
+
         File file1 = new File(imagePath);
         File file2 = new File(imagePath1);
 
         BufferedImage img1 = ImageIO.read(file1);
         BufferedImage img2 = ImageIO.read(file2);
-        BufferedImage im = new BufferedImage(1024,1024,BufferedImage.TYPE_INT_ARGB);
-        im.getGraphics().drawImage(img1,0,0,null);
+
+        BufferedImage im = new BufferedImage(2048,1024,BufferedImage.TYPE_INT_ARGB);
         im.getGraphics().drawImage(img2,0,0,null);
+        im.getGraphics().drawImage(img1,5,5,null);
+        im.getGraphics().drawImage(img1,205,5,null);
+        im.getGraphics().drawImage(img1,405,5,null);
+        im.getGraphics().drawImage(img1,605,5,null);
+        im.getGraphics().drawImage(img1,805,5,null);
+        im.getGraphics().drawImage(img1,5,205,null);
+        im.getGraphics().drawImage(img1,205,205,null);
+        im.getGraphics().drawImage(img1,405,205,null);
+        im.getGraphics().drawImage(img1,605,205,null);
+        im.getGraphics().drawImage(img1,805,205,null);
+        im.getGraphics().drawImage(img1,5,405,null);
+        im.getGraphics().drawImage(img1,205,405,null);
+        im.getGraphics().drawImage(img1,405,405,null);
+        im.getGraphics().drawImage(img1,605,405,null);
+        im.getGraphics().drawImage(img1,805,405,null);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(im, "png", bos );
