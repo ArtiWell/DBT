@@ -23,4 +23,9 @@ public class FlipCommand implements Command {
     public String getKey() {
         return "flip";
     }
+
+    @Override
+    public String description() {
+        return "Подбрасывает монетку и выдаёт один из двух результатов: орёл или решка.";
+    }
 }

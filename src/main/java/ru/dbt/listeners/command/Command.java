@@ -6,4 +6,6 @@ public interface Command {
     void run(MessageReceivedEvent event);
 
     String getKey();
+
+    String description();
 }
