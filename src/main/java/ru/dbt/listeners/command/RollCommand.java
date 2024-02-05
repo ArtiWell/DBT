@@ -12,11 +12,16 @@ public class RollCommand implements Command {
     public void run(MessageReceivedEvent event) {
          event.getChannel().sendMessage(event.getAuthor().getAsMention()
                 + "\n"
-                + (int)(Math.random()*100)).queue();
+                + (int)(Math.random()*100)+1).queue();
     }
 
     @Override
     public String getKey() {
         return "roll";
+    }
+
+    @Override
+    public String description() {
+        return "Выдаёт случайное число от 1 до 100.";
     }
 }
