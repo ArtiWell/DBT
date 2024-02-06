@@ -1,22 +1,22 @@
 package ru.dbt.dao;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import ru.dbt.listeners.command.role.Role;
 
 
 @Getter
 public class User {
-    private final String name;
-    private final int id;
-    private final Role role;
-    private final Long balans;
+    private  int id;
+    private  Role role;
 
-    public User(String name, int id, Role role, Long balans) {
-        this.name = name;
+    public User(int id, Role role) {
         this.id = id;
         this.role = role;
-        this.balans = balans;
     }
 
 
+    public User() {
+
+    }
 }

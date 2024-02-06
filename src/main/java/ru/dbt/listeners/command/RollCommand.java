@@ -24,4 +24,9 @@ public class RollCommand implements Command {
     public String description() {
         return "Выдаёт случайное число от 1 до 100.";
     }
+
+    @Override
+    public Boolean checkRole() {
+        return null;
+    }
 }

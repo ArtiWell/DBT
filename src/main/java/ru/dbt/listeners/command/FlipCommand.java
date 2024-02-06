@@ -18,7 +18,7 @@ public class FlipCommand implements Command {
         } else {
             asMention += "\nрешка";
         }
-        event.getChannel().sendMessage(asMention).queue();
+        event.getChannel().sendMessage(event.getAuthor().getId()).queue();
     }
 
     @Override
@@ -32,8 +32,9 @@ public class FlipCommand implements Command {
     }
 
     @Override
-    public Boolean checkRole(MessageReceivedEvent event) {
-        if (event.getAuthor().equals())
-        return ;
+    public Boolean checkRole() {
+        return null;
     }
+
+
 }

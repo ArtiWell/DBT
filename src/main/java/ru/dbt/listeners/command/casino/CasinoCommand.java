@@ -69,4 +69,14 @@ public class CasinoCommand implements Command {
     public String getKey() {
         return "casino";
     }
+
+    @Override
+    public String description() {
+        return null;
+    }
+
+    @Override
+    public Boolean checkRole() {
+        return null;
+    }
 }

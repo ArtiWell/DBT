@@ -46,4 +46,9 @@ public class HelpCommand implements Command {
     public String description() {
         return "$help выводит все комманды и описание этих команд.";
     }
+
+    @Override
+    public Boolean checkRole() {
+        return null;
+    }
 }

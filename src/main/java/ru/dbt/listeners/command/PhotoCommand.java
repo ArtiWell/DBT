@@ -62,4 +62,9 @@ public class PhotoCommand implements Command {
     public String description() {
         return "Отправляет картинку.";
     }
+
+    @Override
+    public Boolean checkRole() {
+        return null;
+    }
 }

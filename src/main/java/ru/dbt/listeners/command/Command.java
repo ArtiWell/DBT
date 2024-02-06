@@ -11,5 +11,5 @@ public interface Command {
     String description();
 
     Boolean checkRole();
-    }
+
 }
