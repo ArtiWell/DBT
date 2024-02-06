@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 public class FlipCommand implements Command {
 
 
+
+
     @Override
     public void run(MessageReceivedEvent event) {
         int chance = (int) (Math.random() * 2);
@@ -27,5 +29,11 @@ public class FlipCommand implements Command {
     @Override
     public String description() {
         return "Подбрасывает монетку.";
+    }
+
+    @Override
+    public Boolean checkRole(MessageReceivedEvent event) {
+        if (event.getAuthor().equals())
+        return ;
     }
 }

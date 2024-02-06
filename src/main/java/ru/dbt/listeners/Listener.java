@@ -9,6 +9,7 @@ import ru.dbt.listeners.command.Command;
 
 import java.util.Map;
 
+
 @Component
 public class Listener extends ListenerAdapter {
 
