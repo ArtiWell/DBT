@@ -5,12 +5,14 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.springframework.stereotype.Component;
 import ru.dbt.listeners.command.Command;
+import ru.dbt.listeners.command.role.Role;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -33,12 +35,12 @@ public class CasinoCommand implements Command {
     @SneakyThrows
     private Map<Integer, BufferedImage> loadPicture() {
         Map<Integer, BufferedImage> map = new HashMap<>();
-        map.put(0 ,ImageIO.read(new File("src/main/resources/static/black Fon.jpg")));
-        map.put(1, ImageIO.read(new File("src/main/resources/static/1111.png")));
-        map.put(2, ImageIO.read(new File("src/main/resources/static/111.png")));
-        map.put(3, ImageIO.read(new File("src/main/resources/static/333.png")));
-        map.put(4, ImageIO.read(new File("src/main/resources/static/444.png")));
-        map.put(5, ImageIO.read(new File("src/main/resources/static/55.png")));
+        map.put(0 ,ImageIO.read(new File("src/main/resources/static/фон.png")));
+        map.put(1, ImageIO.read(new File("src/main/resources/static/1.png")));
+        map.put(2, ImageIO.read(new File("src/main/resources/static/2.png")));
+        map.put(3, ImageIO.read(new File("src/main/resources/static/3.png")));
+        map.put(4, ImageIO.read(new File("src/main/resources/static/4.png")));
+        map.put(5, ImageIO.read(new File("src/main/resources/static/5.png")));
 
        return map;
     }
@@ -72,11 +74,11 @@ public class CasinoCommand implements Command {
 
     @Override
     public String description() {
-        return null;
+        return "Запускает однорукого бандита.";
     }
 
     @Override
-    public Boolean checkRole() {
-        return null;
+    public List<Role> getRoles() {
+        return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
 }

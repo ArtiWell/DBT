@@ -1,6 +1,9 @@
 package ru.dbt.listeners.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import ru.dbt.listeners.command.role.Role;
+
+import java.util.List;
 
 public interface Command {
 
@@ -10,6 +13,6 @@ public interface Command {
 
     String description();
 
-    Boolean checkRole();
+    List<Role> getRoles();
 
 }
