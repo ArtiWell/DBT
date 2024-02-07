@@ -1,4 +1,4 @@
-package ru.dbt.listeners.command.casino;
+package ru.dbt.listeners.command.casino.calculation;
 
 public interface CalculateWinPoint {
 
