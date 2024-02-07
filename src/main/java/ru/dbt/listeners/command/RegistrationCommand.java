@@ -14,9 +14,6 @@ import java.util.List;
 public class RegistrationCommand implements Command{
     private final UserRepository userRepository;
 
-
-
-
     @Override
     public void run(MessageReceivedEvent event) {
        Long id = event.getAuthor().getIdLong();

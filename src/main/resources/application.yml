@@ -10,7 +10,8 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   liquibase:
-    enabled: false
+    defaultSchema: ${schema:bot}
+    change-log: classpath:db/migration/master.yaml
   jpa:
     hibernate:
       ddl-auto: validate

@@ -29,7 +29,7 @@ public class CasinoCommand implements Command {
     @Override
     public void run(MessageReceivedEvent event) {
 
-        event.getChannel().sendFiles(printToScreen(randomField.randomArray(3, 3))).queue();
+        event.getChannel().sendFiles(printToScreen(randomField.createdFieldWithRandomNumbers(3, 3))).queue();
     }
 
     @SneakyThrows

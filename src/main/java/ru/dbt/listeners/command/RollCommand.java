@@ -15,7 +15,7 @@ public class RollCommand implements Command {
     public void run(MessageReceivedEvent event) {
          event.getChannel().sendMessage(event.getAuthor().getAsMention()
                 + "\n"
-                + (int)(Math.random()*100)+1).queue();
+                + (int)(Math.random()*100+1)).queue();
     }
 
     @Override
