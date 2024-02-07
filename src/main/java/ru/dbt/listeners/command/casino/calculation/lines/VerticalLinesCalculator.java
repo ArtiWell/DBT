@@ -13,15 +13,21 @@ public class VerticalLinesCalculator implements CalculateWinPoint {
     @Override
     public int calculatePoint(int[][] array) {
         int rez = 0;
-        for (int i = 0, j = 0; i < array.length-1;j++) {
-            for ( ;j < array[i].length-1; i++) {
+        int i = 0;
+        int j = 0;
+        for (; j < array[i].length; j++) {
+            boolean win = true;
+            for (; i < array.length; i++) {
                 if (array[0][j] != array[i][j]) {
+                    win=false;
                     break;
                 }
             }
-            rez += array[i][i];
+            i=0;
+            if (win)
+            rez += nominalPicture.convertNominal(array[0][j]);
         }
-        return nominalPicture.convertNominal(rez);
+        return rez;
 
     }
 }

@@ -26,19 +26,19 @@ public class DiagonalCalculator implements CalculateWinPoint {
             }
         }
 
-        for (int i = array.length - 1, j = array.length - 1; j >= 0; j--, i--) {
-            if (array[array.length - 1][array.length - 1] != array[i - 1][j - 1]) {
+        for (int i = array.length - 1, j = 0; j < array.length; j++, i--) {
+            if (array[array.length - 1][0] != array[i][j]) {
                 resY = 0;
                 break;
             }
         }
 
         if (resX == 1)
-            resY = array[0][0];
+            resX = array[0][0];
         if (resY == 1)
-            resX = array[array.length - 1][array.length - 1];
+            resY = array[array.length - 1][0];
 
 
-        return nominalPicture.convertNominal(resX) +nominalPicture.convertNominal(resY);
+        return nominalPicture.convertNominal(resX) + nominalPicture.convertNominal(resY);
     }
 }

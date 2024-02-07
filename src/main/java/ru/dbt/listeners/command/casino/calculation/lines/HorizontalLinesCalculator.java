@@ -13,14 +13,19 @@ public class HorizontalLinesCalculator implements CalculateWinPoint {
     @Override
     public int calculatePoint(int[][] array) {
         int rez = 0;
+
         for (int[] ints : array) {
+            boolean win = true;
             for (int anInt : ints) {
                 if (anInt != ints[0]) {
+                    win = false;
                     break;
                 }
             }
-            rez += ints[0];
+            if (win) {
+                rez += nominalPicture.convertNominal(ints[0]);
+            }
         }
-        return nominalPicture.convertNominal(rez);
+        return rez;
     }
 }
