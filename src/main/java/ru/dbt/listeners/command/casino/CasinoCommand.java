@@ -1,72 +1,66 @@
 package ru.dbt.listeners.command.casino;
 
-import lombok.SneakyThrows;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.utils.FileUpload;
 import org.springframework.stereotype.Component;
 import ru.dbt.listeners.command.Command;
+import ru.dbt.listeners.command.casino.calculation.RandomField;
+import ru.dbt.listeners.command.casino.calculation.lines.DiagonalCalculator;
+import ru.dbt.listeners.command.casino.calculation.lines.HorizontalLinesCalculator;
+import ru.dbt.listeners.command.casino.calculation.lines.VerticalLinesCalculator;
+import ru.dbt.listeners.command.role.Role;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.List;
 
 @Component
 public class CasinoCommand implements Command {
-
-    public CasinoCommand(RandomField randomField) {
-        this.randomField = randomField;
-    }
-
     private final RandomField randomField;
-    private final Map<Integer, BufferedImage> mapImg = loadPicture();
+    private final CreatePictureService pictureService;
+    private final DiagonalCalculator diagonalCalculator;
+    private final HorizontalLinesCalculator horizontalLinesCalculator;
+    private final VerticalLinesCalculator verticalLinesCalculator;
+
+    public CasinoCommand(RandomField randomField
+            , CreatePictureService pictureService
+            , DiagonalCalculator diagonalCalculator
+            , HorizontalLinesCalculator horizontalLinesCalculator
+            , VerticalLinesCalculator verticalLinesCalculator
+    ) {
+        this.diagonalCalculator = diagonalCalculator;
+        this.horizontalLinesCalculator =horizontalLinesCalculator;
+        this.verticalLinesCalculator = verticalLinesCalculator;
+        this.randomField = randomField;
+        this.pictureService = pictureService;
+    }
 
 
     @Override
     public void run(MessageReceivedEvent event) {
+        int[][] arrayField = randomField.createdFieldWithRandomNumbers(3,3);
 
-        event.getChannel().sendFiles(printToScreen(randomField.randomArray(3, 3))).queue();
-    }
+        int winResult = horizontalLinesCalculator.calculatePoint(arrayField)
+                + verticalLinesCalculator.calculatePoint(arrayField)
+                + diagonalCalculator.calculatePoint(arrayField);
 
-    @SneakyThrows
-    private Map<Integer, BufferedImage> loadPicture() {
-        Map<Integer, BufferedImage> map = new HashMap<>();
-        map.put(0 ,ImageIO.read(new File("src/main/resources/static/black Fon.jpg")));
-        map.put(1, ImageIO.read(new File("src/main/resources/static/1111.png")));
-        map.put(2, ImageIO.read(new File("src/main/resources/static/111.png")));
-        map.put(3, ImageIO.read(new File("src/main/resources/static/333.png")));
-        map.put(4, ImageIO.read(new File("src/main/resources/static/444.png")));
-        map.put(5, ImageIO.read(new File("src/main/resources/static/55.png")));
+        event.getChannel().sendFiles(
+                pictureService.createPicture(arrayField)).queue();
 
-       return map;
-    }
-
-
-    @SneakyThrows
-    private FileUpload printToScreen(int[][] array) {
-        BufferedImage im = new BufferedImage(array.length * 200 + 10, array[1].length * 200 + 10, BufferedImage.TYPE_INT_ARGB);
-
-        im.getGraphics().drawImage(mapImg.get(0), 0, 0, null);
-
-        for (int i = 0, xBorder = 10; i < array.length; i++, xBorder += 200) {
-            for (int j = 0,yBorder = 10; j < array[i].length; j++, yBorder += 200) {
-
-                im.getGraphics().drawImage(mapImg.get(array[i][j]), xBorder, yBorder, null);
-            }
-        }
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(im, "png", bos);
-        byte[] data = bos.toByteArray();
-
-        return FileUpload.fromData(data, "result.png");
+        event.getChannel().sendMessage("Ваш вы́игрыш: " +  winResult).queue();
     }
 
 
     @Override
     public String getKey() {
         return "casino";
+    }
+
+    @Override
+    public String description() {
+        return "Запускает однорукого бандита.";
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
 }

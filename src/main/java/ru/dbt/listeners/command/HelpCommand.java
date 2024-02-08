@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import ru.dbt.listeners.command.role.Role;
 
 import java.awt.*;
 import java.util.List;
@@ -45,5 +46,10 @@ public class HelpCommand implements Command {
     @Override
     public String description() {
         return "$help выводит все комманды и описание этих команд.";
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
 }

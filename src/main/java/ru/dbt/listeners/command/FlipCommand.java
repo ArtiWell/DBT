@@ -2,10 +2,12 @@ package ru.dbt.listeners.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.stereotype.Component;
+import ru.dbt.listeners.command.role.Role;
+
+import java.util.List;
 
 @Component
 public class FlipCommand implements Command {
-
 
     @Override
     public void run(MessageReceivedEvent event) {
@@ -16,7 +18,7 @@ public class FlipCommand implements Command {
         } else {
             asMention += "\nрешка";
         }
-        event.getChannel().sendMessage(asMention).queue();
+        event.getChannel().sendMessage(event.getAuthor().getId()).queue();
     }
 
     @Override
@@ -27,5 +29,10 @@ public class FlipCommand implements Command {
     @Override
     public String description() {
         return "Подбрасывает монетку.";
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
 }
