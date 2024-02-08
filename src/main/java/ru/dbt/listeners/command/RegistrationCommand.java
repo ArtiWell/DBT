@@ -17,7 +17,7 @@ public class RegistrationCommand implements Command{
     @Override
     public void run(MessageReceivedEvent event) {
        Long id = event.getAuthor().getIdLong();
-       UserEntity user = new UserEntity(id,Role.ORDINARY);
+       UserEntity user = new UserEntity(id,Role.ORDINARY,1000);
        userRepository.save(user);
        if (userRepository.findById(id).isPresent()) {
            event.getChannel().sendMessage("Пользователь зарегистрирован.").queue();
