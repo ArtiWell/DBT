@@ -3,7 +3,7 @@ package ru.dbt.dao;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.dbt.listeners.command.role.Role;
+import ru.dbt.role.Role;
 
 @Entity
 @Getter

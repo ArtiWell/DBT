@@ -1,7 +1,7 @@
 package ru.dbt.listeners.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import ru.dbt.listeners.command.role.Role;
+import ru.dbt.role.Role;
 
 import java.util.List;
 

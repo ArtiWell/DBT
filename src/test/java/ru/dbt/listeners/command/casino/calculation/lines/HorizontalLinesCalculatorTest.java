@@ -1,7 +1,6 @@
 package ru.dbt.listeners.command.casino.calculation.lines;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,18 +21,14 @@ class HorizontalLinesCalculatorTest {
 
     @Test
     void calculatePoint() {
-        int[][] array = new int[3][3];
-        array[0][0] = 1;
-        array[0][1] = 1;
-        array[0][2] = 1;
-        array[1][0] = 2;
-        array[1][1] = 2;
-        array[1][2] = 2;
-        array[2][0] = 1;
-        array[2][1] = 4;
-        array[2][2] = 5;
+        int[][] array = new int[][] {
+            {1,1,1},
+            {2,2,2},
+            {5,5,5}
+        };
         Mockito.when(nominalPicture.convertNominal(1)).thenReturn(5);
         Mockito.when(nominalPicture.convertNominal(2)).thenReturn(10);
-        Assertions.assertEquals(horizontalLinesCalculator.calculatePoint(array),15);
+        Mockito.when(nominalPicture.convertNominal(5)).thenReturn(100);
+        Assertions.assertEquals(horizontalLinesCalculator.calculatePoint(array),115);
     }
 }

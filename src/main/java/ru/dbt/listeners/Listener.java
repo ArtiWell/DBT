@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.dbt.listeners.command.Command;
-import ru.dbt.listeners.command.role.CheckRole;
+import ru.dbt.role.CheckRole;
 
 import java.util.Map;
 

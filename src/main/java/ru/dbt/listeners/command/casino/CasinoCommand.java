@@ -2,6 +2,9 @@ package ru.dbt.listeners.command.casino;
 
 import jakarta.transaction.Transactional;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.springframework.stereotype.Component;
 import ru.dbt.dao.UserEntity;
 import ru.dbt.dao.UserRepository;
@@ -10,7 +13,7 @@ import ru.dbt.listeners.command.casino.calculation.RandomField;
 import ru.dbt.listeners.command.casino.calculation.lines.DiagonalCalculator;
 import ru.dbt.listeners.command.casino.calculation.lines.HorizontalLinesCalculator;
 import ru.dbt.listeners.command.casino.calculation.lines.VerticalLinesCalculator;
-import ru.dbt.listeners.command.role.Role;
+import ru.dbt.role.Role;
 
 import java.util.List;
 
@@ -42,6 +45,14 @@ public class CasinoCommand implements Command {
     @Override
     @Transactional
     public void run(MessageReceivedEvent event) {
+        //кнопи
+        Button button = Button.success("5", "Ставка 5");
+        Button button1 = Button.success("10","Ставка 10");
+        Button button2 = Button.success("150","Ставка 15");
+        Button button3 = Button.danger("19","Статистика");
+
+
+
         int[][] arrayField = randomField.createdFieldWithRandomNumbers(3, 3);
 
         int winResult = horizontalLinesCalculator.calculatePoint(arrayField)
@@ -55,7 +66,12 @@ public class CasinoCommand implements Command {
         event.getChannel().sendFiles(
                 pictureService.createPicture(arrayField)).queue();
 
-        event.getChannel().sendMessage("Ваш вы́игрыш: " + winResult + " Ваш баланс: " + user.getBalance()).queue();
+        event.getChannel().sendMessage(
+                event.getAuthor().getAsMention()
+                        + " Выйграл: " + winResult + " Ваш баланс: "
+                        + user.getBalance())
+                .addComponents(ActionRow.of(button,button1,button2,button3)).queue();
+
     }
 
 

@@ -1,4 +1,4 @@
-package ru.dbt.listeners.command.role;
+package ru.dbt.role;
 
 public enum Role {
     ADMIN ,
