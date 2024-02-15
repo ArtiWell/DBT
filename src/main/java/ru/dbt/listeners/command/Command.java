@@ -15,4 +15,6 @@ public interface Command {
 
     List<Role> getRoles();
 
+    void setStavka(int stavka);
+
 }

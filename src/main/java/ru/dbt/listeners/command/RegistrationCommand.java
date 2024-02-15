@@ -28,10 +28,13 @@ public class RegistrationCommand implements Command {
 
 
         Long id = event.getAuthor().getIdLong();
-        UserEntity user = new UserEntity(id, Role.ORDINARY, 1000);
-        userRepository.save(user);
-        if (userRepository.findById(id).isPresent()) {
-           event.getChannel().sendMessageEmbeds(author.build()).queue();
+        UserEntity user = new UserEntity(id, Role.ORDINARY, 1000, 5);
+
+        if (userRepository.findById(id).isEmpty()) {
+            userRepository.save(user);
+            event.getChannel().sendMessageEmbeds(author.build()).queue();
+        }else {
+            event.getChannel().sendMessage("Такой пользователь уже есть.").queue();
         }
     }
 
@@ -48,5 +51,10 @@ public class RegistrationCommand implements Command {
     @Override
     public List<Role> getRoles() {
         return List.of();
+    }
+
+    @Override
+    public void setStavka(int stavka) {
+
     }
 }

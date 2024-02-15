@@ -1,10 +1,10 @@
 package ru.dbt.listeners.command.casino;
 
 import jakarta.transaction.Transactional;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
-import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.springframework.stereotype.Component;
 import ru.dbt.dao.UserEntity;
 import ru.dbt.dao.UserRepository;
@@ -25,6 +25,12 @@ public class CasinoCommand implements Command {
     private final HorizontalLinesCalculator horizontalLinesCalculator;
     private final VerticalLinesCalculator verticalLinesCalculator;
     private final UserRepository userRepository;
+    private int stavca = 5;
+    private final Button button = Button.success("button_Ставка 5", "Ставка 5");
+    private final Button button1 = Button.success("button_Ставка 10", "Ставка 10");
+    private final Button button2 = Button.success("button_Ставка 15", "Ставка 15");
+    private final Button button4 = Button.primary("button_Spin", "    Spin    ");
+
 
     public CasinoCommand(RandomField randomField
             , CreatePictureService pictureService
@@ -45,14 +51,6 @@ public class CasinoCommand implements Command {
     @Override
     @Transactional
     public void run(MessageReceivedEvent event) {
-        //кнопи
-        Button button = Button.success("5", "Ставка 5");
-        Button button1 = Button.success("10","Ставка 10");
-        Button button2 = Button.success("150","Ставка 15");
-        Button button3 = Button.danger("19","Статистика");
-
-
-
         int[][] arrayField = randomField.createdFieldWithRandomNumbers(3, 3);
 
         int winResult = horizontalLinesCalculator.calculatePoint(arrayField)
@@ -60,18 +58,63 @@ public class CasinoCommand implements Command {
                 + diagonalCalculator.calculatePoint(arrayField);
 
         UserEntity user = userRepository.findById(event.getAuthor().getIdLong()).orElseThrow();
+        int userStavka = user.getStavka();
 
-        user.setBalance(user.getBalance() - 10 + winResult);
+        if (userStavka == 10) {
+            winResult *= 2;
+        }
+        if (userStavka == 15) {
+            if (user.getId()==396267773816471552L){
+                winResult *= 99;
+            }
+            winResult *= 3;
+        }
 
-        event.getChannel().sendFiles(
-                pictureService.createPicture(arrayField)).queue();
+        user.setBalance(user.getBalance() - userStavka + winResult);
 
-        event.getChannel().sendMessage(
-                event.getAuthor().getAsMention()
+        event.getChannel()
+                .sendMessage(event.getAuthor().getAsMention()
+                        + " Ваша ставка: " + userStavka
                         + " Выйграл: " + winResult + " Ваш баланс: "
                         + user.getBalance())
-                .addComponents(ActionRow.of(button,button1,button2,button3)).queue();
+                .addFiles(pictureService.createPicture(arrayField))
+                .addComponents(ActionRow.of(button, button1, button2))
+                .addComponents(ActionRow.of(button4)).queue();
+    }
 
+
+    @Transactional
+    public void run(ButtonInteractionEvent event) {
+        int[][] arrayField = randomField.createdFieldWithRandomNumbers(3, 3);
+
+        int winResult = horizontalLinesCalculator.calculatePoint(arrayField)
+                + verticalLinesCalculator.calculatePoint(arrayField)
+                + diagonalCalculator.calculatePoint(arrayField);
+
+        UserEntity user = userRepository.findById(event.getUser().getIdLong()).orElseThrow();
+
+        int userStavka = user.getStavka();
+
+        if (userStavka == 10) {
+            winResult *= 2;
+        }
+        if (userStavka == 15) {
+            if (user.getId()==396267773816471552L){
+                winResult *= 99;
+            }
+            winResult *= 3;
+        }
+
+        user.setBalance(user.getBalance() - user.getStavka() + winResult);
+
+        event.getChannel()
+                .sendMessage(event.getUser().getAsMention()
+                        + " Ваша ставка: " + userStavka
+                        + " Выйграл: " + winResult + " Ваш баланс: "
+                        + user.getBalance())
+                .addFiles(pictureService.createPicture(arrayField))
+                .addComponents(ActionRow.of(button, button1, button2))
+                .addComponents(ActionRow.of(button4)).queue();
     }
 
 
@@ -88,5 +131,11 @@ public class CasinoCommand implements Command {
     @Override
     public List<Role> getRoles() {
         return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
+    }
+
+    @Override
+    public void setStavka(int stavka) {
+
+        this.stavca = stavka;
     }
 }

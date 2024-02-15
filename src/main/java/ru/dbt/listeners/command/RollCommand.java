@@ -33,4 +33,9 @@ public class RollCommand implements Command {
         return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
 
+    @Override
+    public void setStavka(int stavka) {
+
+    }
+
 }

@@ -35,4 +35,9 @@ public class FlipCommand implements Command {
     public List<Role> getRoles() {
         return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
     }
+
+    @Override
+    public void setStavka(int stavka) {
+
+    }
 }

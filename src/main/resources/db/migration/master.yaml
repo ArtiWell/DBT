@@ -5,4 +5,7 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: init/create_column_balance.xml
+  - include:
+      relativeToChangelogFile: true
+      file: init/create_column_stavka.xml
 
