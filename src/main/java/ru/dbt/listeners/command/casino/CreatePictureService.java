@@ -19,12 +19,12 @@ public class CreatePictureService {
     @SneakyThrows
     private Map<Integer, BufferedImage> loadPicture() {
         Map<Integer, BufferedImage> map = new HashMap<>();
-        map.put(0, ImageIO.read(new File("src/main/resources/static/фон.png")));
-        map.put(1, ImageIO.read(new File("src/main/resources/static/1.png")));
-        map.put(2, ImageIO.read(new File("src/main/resources/static/2.png")));
-        map.put(3, ImageIO.read(new File("src/main/resources/static/3.png")));
-        map.put(4, ImageIO.read(new File("src/main/resources/static/4.png")));
-        map.put(5, ImageIO.read(new File("src/main/resources/static/5.png")));
+        map.put(0, ImageIO.read(new File("src/main/resources/static/чёрный фон.jpg")));
+        map.put(1, ImageIO.read(new File("src/main/resources/static/11.png")));
+        map.put(2, ImageIO.read(new File("src/main/resources/static/22.png")));
+        map.put(3, ImageIO.read(new File("src/main/resources/static/33.png")));
+        map.put(4, ImageIO.read(new File("src/main/resources/static/44.png")));
+        map.put(5, ImageIO.read(new File("src/main/resources/static/55.png")));
 
         return map;
     }

@@ -2,3 +2,10 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: init/init_tables.xml
+  - include:
+      relativeToChangelogFile: true
+      file: init/create_column_balance.xml
+  - include:
+      relativeToChangelogFile: true
+      file: init/create_column_stavka.xml
+

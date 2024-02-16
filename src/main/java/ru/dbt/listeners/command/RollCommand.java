@@ -3,7 +3,7 @@ package ru.dbt.listeners.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.stereotype.Component;
-import ru.dbt.listeners.command.role.Role;
+import ru.dbt.role.Role;
 
 import java.util.List;
 
@@ -31,6 +31,11 @@ public class RollCommand implements Command {
     @Override
     public List<Role> getRoles() {
         return List.of(Role.ADMIN, Role.VIP, Role.ORDINARY);
+    }
+
+    @Override
+    public void setStavka(int stavka) {
+
     }
 
 }

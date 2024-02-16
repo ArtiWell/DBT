@@ -21,16 +21,11 @@ class DiagonalCalculatorTest {
 
     @Test
     void calculatePoint() {
-        int[][] array = new int[3][3];
-        array[0][0] = 1;
-        array[0][1] = 1;
-        array[0][2] = 3;
-        array[1][0] = 1;
-        array[1][1] = 3;
-        array[1][2] = 2;
-        array[2][0] = 3;
-        array[2][1] = 4;
-        array[2][2] = 3;
+        int[][] array = new int[][]{
+                {1,1,3},
+                {1,3,2},
+                {3,4,3}
+        };
         Mockito.when(nominalPicture.convertNominal(3)).thenReturn(25);
         Mockito.when(nominalPicture.convertNominal(0)).thenReturn(0);
         Assertions.assertEquals(diagonalCalculator.calculatePoint(array),25);

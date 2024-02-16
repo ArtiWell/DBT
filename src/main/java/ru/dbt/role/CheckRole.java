@@ -1,4 +1,4 @@
-package ru.dbt.listeners.command.role;
+package ru.dbt.role;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
